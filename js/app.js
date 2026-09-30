@@ -98,7 +98,7 @@ window.YQ = window.YQ || {};
     $('#onboard').innerHTML = `
       <div class="onboard">
         <div class="onboard-brand"><span class="logo">→</span> 一起去 · 周末</div>
-        <h1>这个周末，<br>按你的节奏来。</h1>
+        <h1>这个周末，<br><em>按你的节奏来。</em></h1>
         <p class="onboard-sub">同一份周末计划，两种节奏。不用选对角色，随时可以切换。</p>
         <div class="onboard-cards">
           <button class="ob-card ob-p" onclick="YQ.pickMode('P')">
@@ -172,7 +172,7 @@ window.YQ = window.YQ || {};
       : `<button class="btn-sm yellow" onclick="YQ.toSchedule('${p.id}')">排入课表</button>`;
     return `
       <article class="card place" onclick="YQ.openPlace('${p.id}')">
-        <div class="card-emoji" style="background:${c.color}">${p.emoji}</div>
+        <div class="card-emoji" style="border-color:${c.color};color:${c.color};background:${c.color}22">${p.emoji}</div>
         <div class="card-main">
           <div class="card-title">${esc(p.name)}</div>
           <div class="card-meta">${c.emoji} ${c.name} · ${p.distance}km · ${p.priceText} · ★${p.rating}</div>
@@ -298,7 +298,7 @@ window.YQ = window.YQ || {};
       ({ user: '我', mood: x.mood, text: x.note }));
     const reviews = [...myReviews, ...p.reviews];
     openModal(`
-      <div class="d-hero" style="background:${c.color}">
+      <div class="d-hero" style="background:${c.color}33;border-color:${c.color};color:#3a3324">
         <span>${p.emoji}</span>
         <div><h3>${esc(p.name)}</h3><small>${p.location} · 距离 ${p.distance}km</small></div>
       </div>
@@ -445,7 +445,7 @@ window.YQ = window.YQ || {};
         ${state.checkins.map(c => {
           const p = placeById(c.placeId);
           return `<div class="wall-item">
-            <span class="wall-emoji" style="background:${p ? catColor(p.cat) : '#ccc'}">${p ? p.emoji : '📍'}</span>
+            <span class="wall-emoji" style="border-color:${p ? catColor(p.cat) : '#ccc'};color:${p ? catColor(p.cat) : '#ccc'};background:${p ? catColor(p.cat) : '#ccc'}22">${p ? p.emoji : '📍'}</span>
             <div><b>${esc(p ? p.name : '未知地点')} ${c.mood}</b>
             <p>${esc(c.note)}</p><small>${new Date(c.ts).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</small></div>
           </div>`;
@@ -520,7 +520,7 @@ window.YQ = window.YQ || {};
         if (!state.schedule[d][s]) state.schedule[d][s] = g.placeIds[i++];
       }
     save(); setMode('J');
-    state.tab = 'plan'; renderPlan(); renderHeader();
+    YQ.goTab('plan');
     toast('攻略已照着排进课表 📋');
   };
   YQ.writeGuide = () => {
